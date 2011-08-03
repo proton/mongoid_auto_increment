@@ -3,11 +3,11 @@ $:.push File.expand_path("../lib", __FILE__)
 require "mongoid_auto_inc/version"
 
 Gem::Specification.new do |s|
-  s.name        = "mongoid_auto_inc"
+  s.name        = "mongoid_auto_increment"
   s.version     = MongoidAutoInc::VERSION
   s.platform    = Gem::Platform::RUBY
-  s.authors     = ["Jeff Smith"]
-  s.email       = ["jffreyjs@gmail.com"]
+  s.authors     = ["Peter Savichev (proton)"]
+  s.email       = ["psavichev@gmail.com"]
   s.homepage    = ""
   s.summary     = %q{Adds auto increment capabilities to Mongoid::Document}
   s.description = %q{Adds auto increment capabilities to Mongoid::Document}

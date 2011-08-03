@@ -1,6 +1,6 @@
 # This is a modified version of the code found on this blog post:
 #   http://ihswebdesign.com/blog/autoincrement-in-mongodb-with-ruby/
-module MongoidAutoInc
+module MongoidAutoIncrement
   class Incrementor
     class Sequence
       def initialize(sequence, collection_name, seed)
@@ -16,7 +16,7 @@ module MongoidAutoInc
       def set(number)
         update_number_with("$set" => { "number" => number })
       end
-    
+
       private
 
       def exists?
@@ -30,15 +30,15 @@ module MongoidAutoInc
       def collection
         Mongoid.database[@collection]
       end
-      
+
       def query
         { "seq_name" => @sequence }
       end
-        
+
       def current
         collection.find_one(query)["number"]
       end
-      
+
       def update_number_with(mongo_func)
         opts = {
           "query"  => query,
@@ -48,7 +48,7 @@ module MongoidAutoInc
         collection.find_and_modify(opts)["number"]
       end
     end
-    
+
     def initialize(options=nil)
       options ||= {}
       @collection = options[:collection] || "sequences"
