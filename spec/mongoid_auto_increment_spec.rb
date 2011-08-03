@@ -28,10 +28,10 @@ describe "mongoid_auto_increment" do
   end
 
   it "should have id 1002" do
-    @order1.num.should eql 1002
+    @order2.num.should eql 1002
   end
 
   it "should have id 1003" do
-    @order1.num.should eql 1003
+    @order3.num.should eql 1003
   end
 end

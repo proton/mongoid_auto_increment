@@ -10,12 +10,17 @@ module MongoidAutoIncrement
       end
 
        def inc
-         update_number_with("$inc" => { "number" => 1 })
+        opts = {
+          "query"  => query,
+          "update" => {"$inc" => { "number" => 1 }},
+          "new"    => true # return the modified document
+        }
+        collection.find_and_modify(opts)["number"]
        end
 
-#       def set(number)
-#         update_number_with("$set" => { "number" => number })
-#       end
+      def current
+        collection.find_one(query)["number"]
+      end
 
       private
 
@@ -23,7 +28,7 @@ module MongoidAutoIncrement
         collection.find(query).count > 0
       end
 
-      def create(number = 0)
+      def create(number)
         collection.insert(query.merge({ "number" => number }))
       end
 
@@ -34,19 +39,6 @@ module MongoidAutoIncrement
       def query
         { "seq_name" => @sequence }
       end
-
-      def current
-        collection.find_one(query)["number"]
-      end
-
-      def update_number_with(mongo_func)
-        opts = {
-          "query"  => query,
-          "update" => mongo_func,
-          "new"    => true # return the modified document
-        }
-        collection.find_and_modify(opts)["number"]
-      end
     end
 
     def initialize(options=nil)
@@ -56,12 +48,7 @@ module MongoidAutoIncrement
       options ||= {}
       collection = options[:collection] || "sequences"
       seed = options[:seed].to_i
-
       Sequence.new(sequence, collection, seed).inc
     end
-
-#     def []=(sequence, number)
-#       Sequence.new(sequence, @collection, @seed).set(number)
-#     end
   end
 end
