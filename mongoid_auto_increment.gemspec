@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{mongoid_auto_increment}
-  s.version = "0.0.7"
+  s.version = "0.0.8"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = [%q{Peter Savichev (proton)}]
@@ -27,7 +27,10 @@ Gem::Specification.new do |s|
     "lib/mongoid_auto_increment.rb",
     "lib/mongoid_auto_increment/incrementor.rb",
     "mongoid_auto_increment.gemspec",
-    "spec/mongoid_auto_increment_spec.rb"
+    "spec/models/book.rb",
+    "spec/models/order.rb",
+    "spec/mongoid_auto_increment_spec.rb",
+    "spec/spec_helper.rb"
   ]
   s.homepage = %q{http://github.com/proton/mongoid_auto_increment}
   s.licenses = [%q{MIT}]
