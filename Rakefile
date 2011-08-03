@@ -50,7 +50,7 @@ task :build do
 	puts "Regenerating gemspec"
   system "rake gemspec"
 	puts "Building"
-  system "gem build mongoid_rateable.gemspec"
+  system "gem build mongoid_auto_increment.gemspec"
 end
 
 desc "Release gem"
