@@ -27,13 +27,13 @@ Jeweler::Tasks.new do |gem|
 end
 Jeweler::RubygemsDotOrgTasks.new
 
-# require 'rspec/core/rake_task'
-#
-# RSpec::Core::RakeTask.new(:spec) do |spec|
-#   spec.pattern = 'spec/**/*_spec.rb'
-# end
-#
-# task :default => :spec
+require 'rspec/core/rake_task'
+
+RSpec::Core::RakeTask.new(:spec) do |spec|
+  spec.pattern = 'spec/**/*_spec.rb'
+end
+
+task :default => :spec
 
 require 'rdoc/task'
 RDoc::Task.new do |rdoc|
