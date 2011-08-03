@@ -9,13 +9,13 @@ module MongoidAutoIncrement
         exists? || create(seed)
       end
 
-      def inc
-        update_number_with("$inc" => { "number" => 1 })
-      end
+       def inc
+         update_number_with("$inc" => { "number" => 1 })
+       end
 
-      def set(number)
-        update_number_with("$set" => { "number" => number })
-      end
+#       def set(number)
+#         update_number_with("$set" => { "number" => number })
+#       end
 
       private
 
@@ -50,17 +50,18 @@ module MongoidAutoIncrement
     end
 
     def initialize(options=nil)
+    end
+
+    def inc(sequence, options)
       options ||= {}
-      @collection = options[:collection] || "sequences"
-      @seed = options[:seed].to_i
+      collection = options[:collection] || "sequences"
+      seed = options[:seed].to_i
+
+      Sequence.new(sequence, collection, seed).inc
     end
 
-    def [](sequence)
-      Sequence.new(sequence, @collection, @seed)
-    end
-
-    def []=(sequence, number)
-      Sequence.new(sequence, @collection, @seed).set(number)
-    end
+#     def []=(sequence, number)
+#       Sequence.new(sequence, @collection, @seed).set(number)
+#     end
   end
 end
