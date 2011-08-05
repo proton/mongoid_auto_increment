@@ -14,51 +14,57 @@ describe "mongoid_auto_increment" do
     @post3 = Post.create :name => "Last Post"
   end
 
-  it "should have id 1" do
-    @book1.sequence.should eql 1
+  describe "single auto-increment field" do
+    it "should have id 1" do
+      @book1.sequence.should eql 1
+    end
+
+    it "should have id 2" do
+      @book2.sequence.should eql 2
+    end
+
+    it "should have id 3" do
+      @book3.sequence.should eql 3
+    end
   end
 
-  it "should have id 2" do
-    @book2.sequence.should eql 2
+  describe "single auto-increment field with seed 1000" do
+    it "should have id 1001" do
+      @order1.num.should eql 1001
+    end
+
+    it "should have id 1002" do
+      @order2.num.should eql 1002
+    end
+
+    it "should have id 1003" do
+      @order3.num.should eql 1003
+    end
   end
 
-  it "should have id 3" do
-    @book3.sequence.should eql 3
-  end
+  describe "two auto-increment fields" do
+    it "should have id 1" do
+      @post1.key.should eql 501
+    end
 
-  it "should have id 1001" do
-    @order1.num.should eql 1001
-  end
+    it "should have id 2" do
+      @post2.key.should eql 502
+    end
 
-  it "should have id 1002" do
-    @order2.num.should eql 1002
-  end
+    it "should have id 3" do
+      @post3.key.should eql 503
+    end
 
-  it "should have id 1003" do
-    @order3.num.should eql 1003
-  end
+    it "should have id 1" do
+      @post1.num.should eql 1
+    end
 
-  it "should have id 1" do
-    @post1.key.should eql 501
-  end
+    it "should have id 2" do
+      @post2.num.should eql 2
+    end
 
-  it "should have id 2" do
-    @post2.key.should eql 502
-  end
-
-  it "should have id 3" do
-    @post3.key.should eql 503
-  end
-
-  it "should have id 1" do
-    @post1.num.should eql 1
-  end
-
-  it "should have id 2" do
-    @post2.num.should eql 2
-  end
-
-  it "should have id 3" do
-    @post3.num.should eql 3
+    it "should have id 3" do
+      @post3.num.should eql 3
+    end
   end
 end
