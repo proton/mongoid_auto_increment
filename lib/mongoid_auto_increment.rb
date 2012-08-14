@@ -1,4 +1,5 @@
-require "mongoid_auto_increment/incrementor"
+require 'mongoid_auto_increment/version'
+require 'mongoid_auto_increment/incrementor'
 
 module MongoidAutoIncrement
   extend ActiveSupport::Concern
