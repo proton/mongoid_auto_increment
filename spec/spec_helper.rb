@@ -13,7 +13,7 @@ SimpleCov.start
 
 Dir["#{MODELS}/*.rb"].each { |f| require f }
 
-if defined?(::Mongoid) && ::Mongoid::VERSION >= '3'
+if defined?(::Mongoid) && ::Mongoid::VERSION > '3'
   Mongoid::Config.sessions = { default: { database: 'mongoid_auto_increment_test', hosts: %w(localhost:27017) } }
 else
   Mongoid.config.master = Mongo::Connection.new.db("mongoid_auto_increment_test")
