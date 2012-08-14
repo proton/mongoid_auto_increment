@@ -12,6 +12,6 @@ group :development do
   gem 'rake'
   gem 'rdoc'
   gem 'rspec', '>= 2.0.0'
-  gem 'simplecov', '>= 0.4.0', require: false
+  gem 'simplecov', '>= 0.4.0', :require => false
   gem 'database_cleaner'
 end
