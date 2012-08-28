@@ -12,6 +12,8 @@ describe "mongoid_auto_increment" do
     @post1 = Post.create :name => "First Post"
     @post2 = Post.create :name => "Second Post"
     @post3 = Post.create :name => "Last Post"
+    @comment1 = @post1.comments.create :name => "First Comment"
+    @comment2 = @post1.comments.create :name => "Second Comment"
   end
 
   describe "single auto-increment field" do
@@ -25,6 +27,14 @@ describe "mongoid_auto_increment" do
 
     it "should have id 3" do
       @book3.sequence.should eql 3
+    end
+
+    it "should have id 1" do
+      @comment1.idn.should eql 1
+    end
+
+    it "should have id 2" do
+      @comment2.idn.should eql 2
     end
   end
 
