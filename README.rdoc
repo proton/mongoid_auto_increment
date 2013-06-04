@@ -47,6 +47,12 @@ Use the <tt>:seed</tt> option to set the initial value of the auto-incremented f
 * Make sure to add tests for it. This is important so I don't break it in a future version unintentionally.
 * Please try not to mess with the Rakefile, version, or history. If you want to have your own version, or is otherwise necessary, that is fine, but please isolate to its own commit so I can cherry-pick around it.
 
+== Support us
+
+
+{<img src="http://api.flattr.com/button/flattr-badge-large.png" />}[https://flattr.com/submit/auto?user_id=proton&url=https://github.com/proton/mongoid_auto_increment/&title=MongoidAutoIncrement&language=&tags=github&category=software]
+
+
 == Copyright
 
 (c) 2011 Peter Savichev (proton)
