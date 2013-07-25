@@ -14,6 +14,9 @@ describe "mongoid_auto_increment" do
     @post3 = Post.create :name => "Last Post"
     @comment1 = @post1.comments.create :name => "First Comment"
     @comment2 = @post1.comments.create :name => "Second Comment"
+    @invoice1 = Invoice.create :name => "First invoice"
+    @invoice2 = Invoice.create :name => "Second invoice"
+    @invoice3 = Invoice.create :name => "Third invoice"
   end
 
   describe "single auto-increment field" do
@@ -75,6 +78,18 @@ describe "mongoid_auto_increment" do
 
     it "should have id 3" do
       @post3.num.should eql 3
+    end
+  end
+
+  describe "auto-increment with step" do
+    it "should have id 1005" do
+      @invoice1.num.should eq 1005
+    end
+    it "should have id 1010" do
+      @invoice2.num.should eq 1010
+    end
+    it "should have id 1015" do
+      @invoice3.num.should eq 1015
     end
   end
 end
