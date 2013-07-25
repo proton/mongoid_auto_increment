@@ -3,19 +3,20 @@
 module MongoidAutoIncrement
   class Incrementor
     class Sequence
-      def initialize(sequence, collection_name, seed)
+      def initialize(sequence, collection_name, seed, step)
         @sequence = sequence.to_s
         @collection = collection_name.to_s
         exists? || create(seed)
+        @step = step.to_i
       end
 
        def inc
         if defined?(::Mongoid::VERSION) && ::Mongoid::VERSION > '3'
-          collection.find(query).modify({ '$inc' => { number: 1 } }, new: true, upsert: true)['number']
+          collection.find(query).modify({ '$inc' => { number: @step } }, new: true, upsert: true)['number']
         else
           opts = {
             "query"  => query,
-            "update" => {"$inc" => { "number" => 1 }},
+            "update" => {"$inc" => { "number" => @step }},
             "new"    => true # return the modified document
           }
           collection.find_and_modify(opts)["number"]
@@ -60,7 +61,8 @@ module MongoidAutoIncrement
       options ||= {}
       collection = options[:collection] || "sequences"
       seed = options[:seed].to_i
-      Sequence.new(sequence, collection, seed).inc
+      step = options[:step] || 1
+      Sequence.new(sequence, collection, seed, step).inc
     end
   end
 end
