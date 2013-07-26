@@ -33,9 +33,13 @@ You can add more than one auto-incremented field per model.
 
 <tt>mongoid_auto_inc</tt> keeps track of the current number in the sequence by creating a separate document mongoDB to query and update.  By default <tt>auto_increment</tt> will save this document to a mongoDB collection called <tt>sequences</tt>.  If you wish to save to a different collection use the <tt>:collection</tt> option to specify its name.
 
+    auto_increment :sequence, :step => 5
+
+If desired, you can override the <tt>:step</tt>, or increment amount (default is 1).
+
     auto_increment :sequence, :seed => 3333
 
-Use the <tt>:seed</tt> option to set the initial value of the auto-incremented field.  The first number assigned from the sequence will be the next number after the seed value.
+Use the <tt>:seed</tt> option to set the initial value of the auto-incremented field.  The first number assigned from the sequence will be the next number after the seed value (including the step - so for <tt>:seed => 1000, :step => 5</tt>, first value will be 1005).
 
 == Contributing to Mongoid::AutoIncrement
 
