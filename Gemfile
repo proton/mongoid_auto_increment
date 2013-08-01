@@ -1,7 +1,6 @@
 source 'https://rubygems.org'
 
 # Specify your gem's dependencies in mongoid_auto_increment.gemspec
-gemspec
 
 gem 'mongoid', '>= 2.0'
 
