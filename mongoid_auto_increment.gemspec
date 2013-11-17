@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = "mongoid_auto_increment"
-  s.version = "0.1.1"
+  s.version = "0.1.2"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Peter Savichev (proton)"]
-  s.date = "2013-08-01"
+  s.date = "2013-11-17"
   s.description = "Add SQL like auto-incrementing fields to your Mongoid documents."
   s.email = "psavichev@gmail.com"
   s.extra_rdoc_files = [
