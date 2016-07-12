@@ -1,5 +1,6 @@
 class Order
   include Mongoid::Document
+  include Mongoid::Attributes::Dynamic
 
   field :title
 
