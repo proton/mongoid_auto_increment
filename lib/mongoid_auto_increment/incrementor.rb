@@ -11,8 +11,10 @@ module MongoidAutoIncrement
       end
 
        def inc
-        if defined?(::Mongoid::VERSION) && ::Mongoid::VERSION > '3'
-          collection.find(query).modify({ '$inc' => { number: @step } }, new: true, upsert: true)['number']
+        if defined?(::Mongoid::VERSION) && ::Mongoid::VERSION >= '5'
+          collection.find(query).find_one_and_update({ '$inc' => { number: @step } }, new: true, upsert: true, return_document: :after)['number']
+        elsif defined?(::Mongoid::VERSION) && ::Mongoid::VERSION > '3'
+          collection.find(query).modify({ '$inc' => { number: @step } }, new: true, upsert: true)
         else
           opts = {
             "query"  => query,
@@ -38,11 +40,17 @@ module MongoidAutoIncrement
       end
 
       def create(number)
-        collection.insert(query.merge({ "number" => number }))
+        if ::Mongoid::VERSION >= '5'
+          collection.insert_one(query.merge({ "number" => number }))
+        else
+          collection.insert(query.merge({ "number" => number }))
+        end
       end
 
       def collection
-        if defined?(::Mongoid::VERSION) && ::Mongoid::VERSION > '3'
+        if defined?(::Mongoid::VERSION) && ::Mongoid::VERSION >= '5'
+          Mongoid.default_client[@collection]
+        elsif defined?(::Mongoid::VERSION) && ::Mongoid::VERSION > '3'
           Mongoid.default_session[@collection]
         else
           Mongoid.database[@collection]

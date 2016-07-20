@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 # Specify your gem's dependencies in mongoid_auto_increment.gemspec
 
-gem 'mongoid', '>= 2.0'
+gem 'mongoid', '>= 5.0'
 
 # Add dependencies to develop your gem here.
 # Include everything needed to run rake, tests, features, etc.

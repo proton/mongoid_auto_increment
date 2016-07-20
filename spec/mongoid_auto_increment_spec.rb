@@ -21,75 +21,75 @@ describe "mongoid_auto_increment" do
 
   describe "single auto-increment field" do
     it "should have id 1" do
-      @book1.sequence.should eql 1
+      expect(@book1.sequence).to eql 1
     end
 
     it "should have id 2" do
-      @book2.sequence.should eql 2
+      expect(@book2.sequence).to eql 2
     end
 
     it "should have id 3" do
-      @book3.sequence.should eql 3
+      expect(@book3.sequence).to eql 3
     end
 
     it "should have id 1" do
-      @comment1.idn.should eql 1
+      expect(@comment1.idn).to eql 1
     end
 
     it "should have id 2" do
-      @comment2.idn.should eql 2
+      expect(@comment2.idn).to eql 2
     end
   end
 
   describe "single auto-increment field with seed 1000" do
     it "should have id 1001" do
-      @order1.num.should eql 1001
+      expect(@order1.num).to eql 1001
     end
 
     it "should have id 1002" do
-      @order2.num.should eql 1002
+      expect(@order2.num).to eql 1002
     end
 
     it "should have id 1003" do
-      @order3.num.should eql 1003
+      expect(@order3.num).to eql 1003
     end
   end
 
   describe "two auto-increment fields" do
     it "should have id 1" do
-      @post1.key.should eql 501
+      expect(@post1.key).to eql 501
     end
 
     it "should have id 2" do
-      @post2.key.should eql 502
+      expect(@post2.key).to eql 502
     end
 
     it "should have id 3" do
-      @post3.key.should eql 503
+      expect(@post3.key).to eql 503
     end
 
     it "should have id 1" do
-      @post1.num.should eql 1
+      expect(@post1.num).to eql 1
     end
 
     it "should have id 2" do
-      @post2.num.should eql 2
+      expect(@post2.num).to eql 2
     end
 
     it "should have id 3" do
-      @post3.num.should eql 3
+      expect(@post3.num).to eql 3
     end
   end
 
   describe "auto-increment with step" do
     it "should have id 1005" do
-      @invoice1.num.should eq 1005
+      expect(@invoice1.num).to eq 1005
     end
     it "should have id 1010" do
-      @invoice2.num.should eq 1010
+      expect(@invoice2.num).to eq 1010
     end
     it "should have id 1015" do
-      @invoice3.num.should eq 1015
+      expect(@invoice3.num).to eq 1015
     end
   end
 end
