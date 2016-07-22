@@ -16,3 +16,13 @@ env:
   - MONGOID_VERSION=3                                                                                         
   - MONGOID_VERSION=4                                                                                         
   - MONGOID_VERSION=5 
+  - MONGOID_VERSION=6 
+
+matrix:
+  exclude: 
+    - rvm: 1.9.3
+      env: MONGOID_VERSION=6
+    - rvm: 2.0.0
+      env: MONGOID_VERSION=6
+    - rvm: 2.1.1
+      env: MONGOID_VERSION=6

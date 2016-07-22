@@ -2,7 +2,9 @@ source 'https://rubygems.org'
 
 # Specify your gem's dependencies in mongoid_auto_increment.gemspec
 
-case version = ENV['MONGOID_VERSION'] || '~> 5.0'                                                                
+case version = ENV['MONGOID_VERSION'] || '~> 6.0'                                                                
+when /6/
+  gem 'mongoid', git: 'git@github.com:mongodb/mongoid.git'
 when /5/                                                                                                         
   gem 'mongoid', '~> 5.0'                                                                                        
 when /4/                                                                                                         
@@ -19,6 +21,7 @@ group :development do
   gem 'bundler'
   gem 'jeweler', '~> 1.8.6'
   gem 'rake'
+  gem 'rack', '~> 1.6.4'
   gem 'rdoc'
   gem 'rspec', '>= 2.0.0'
   gem 'simplecov', '>= 0.4.0', require: false
