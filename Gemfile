@@ -2,18 +2,16 @@ source 'https://rubygems.org'
 
 # Specify your gem's dependencies in mongoid_auto_increment.gemspec
 
-case version = ENV['MONGOID_VERSION'] || '~> 6.0'                                                                
-when /6/
-  gem 'mongoid', git: 'git@github.com:mongodb/mongoid.git'
-when /5/                                                                                                         
-  gem 'mongoid', '~> 5.0'                                                                                        
-when /4/                                                                                                         
-  gem 'mongoid', '~> 4.0'                                                                                        
-when /3/                                                                                                         
-  gem 'mongoid', '~> 3.0'                                                                                     
-else                                                                                                             
-  gem 'mongoid', '~> 2.0'                                                                                         
-end       
+version = case ENV['MONGOID_VERSION']
+          when /6/ then '~> 6.0'
+          when /5/ then '~> 5.0'
+          when /4/ then '~> 4.0'
+          when /3/ then '~> 3.0'
+          else
+            '~> 2.0'
+          end
+
+gem 'mongoid', version
 
 # Add dependencies to develop your gem here.
 # Include everything needed to run rake, tests, features, etc.
