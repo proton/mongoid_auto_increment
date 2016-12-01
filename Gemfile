@@ -17,7 +17,7 @@ gem 'mongoid', version
 # Include everything needed to run rake, tests, features, etc.
 group :development do
   gem 'bundler'
-  gem 'jeweler', '~> 1.8.6'
+  gem 'jeweler', '~> 2.1.1'
   gem 'rake'
   gem 'rack', '~> 1.6.4'
   gem 'rdoc'
