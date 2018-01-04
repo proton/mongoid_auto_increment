@@ -4,6 +4,7 @@ Add SQL like auto-incrementing fields to your Mongoid documents.
 This gem is inspired by http://ihswebdesign.com/blog/autoincrement-in-mongodb-with-ruby/ and the mongomapper_id2[https://github.com/phstc/mongomapper_id2] gem.
 
 {<img src="https://secure.travis-ci.org/proton/mongoid_auto_increment.png" />}[http://travis-ci.org/proton/mongoid_auto_increment]
+{<img src="https://www.codetriage.com/proton/mongoid_auto_increment/badges/users.svg" />}[https://www.codetriage.com/proton/mongoid_auto_increment]
 
 == Installation
 
