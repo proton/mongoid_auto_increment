@@ -44,6 +44,11 @@ If desired, you can override the <tt>:step</tt>, or increment amount (default is
 
 Use the <tt>:seed</tt> option to set the initial value of the auto-incremented field.  The first number assigned from the sequence will be the next number after the seed value (including the step - so for <tt>:seed => 1000, :step => 5</tt>, first value will be 1005).
 
+    auto_increment :sequence, :scope => :some_field_or_relation
+    auto_increment :sequence, :scope => [ :some_field_or_relation, :another_field_or_relation ]
+
+Use the <tt>:scope</tt> option to scope an auto-incremented field to a query.  Similar to Mongoid, the scope may contain one or many fields or relations.  Each unique scope will result in it's own stream of incremented values.
+
 == Contributing to Mongoid::AutoIncrement
 
 * Check out the latest master to make sure the feature hasn't been implemented or the bug hasn't been fixed yet
