@@ -3,9 +3,10 @@
 module MongoidAutoIncrement
   class Incrementor
     class Sequence
-      def initialize(sequence, collection_name, seed, step)
+      def initialize(sequence, collection_name, seed, step, scope)
         @sequence = sequence.to_s
         @collection = collection_name.to_s
+        @scope = scope || {}
         exists? || create(seed)
         @step = step.to_i
       end
@@ -58,18 +59,36 @@ module MongoidAutoIncrement
       end
 
       def query
-        { "seq_name" => @sequence }
+        @scope.merge("seq_name" => @sequence)
       end
     end
 
     def initialize(options=nil)
     end
 
-    def inc(sequence, options)
+    def inc(sequence, options, record)
       collection = options[:collection] || "sequences"
       seed = options[:seed].to_i
       step = options[:step] || 1
-      Sequence.new(sequence, collection, seed, step).inc
+      scope = resolve_scope(record, options[:scope])
+
+      Sequence.new(sequence, collection, seed, step, scope).inc
+    end
+
+    private
+
+    def resolve_scope(record, scope)
+      Array(scope).each_with_object({}) do |scope_item, query|
+        reflection = record.class.reflect_on_association(scope_item)
+
+        if reflection
+          scope_value = record.send(reflection.foreign_key)
+          scope_item  = reflection.foreign_key
+          query[scope_item] = scope_value
+        else
+          query[scope_item] = record.read_attribute(scope_item)
+        end
+      end
     end
   end
 end

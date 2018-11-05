@@ -15,7 +15,7 @@ module MongoidAutoIncrement
       seq_name  = options[:name] || "#{self.name.downcase}_#{name}"
 
       before_create do
-        send("#{name}=", @@incrementor.inc(seq_name, options))
+        send("#{name}=", @@incrementor.inc(seq_name, options, self))
       end
     end
   end

@@ -123,4 +123,61 @@ describe 'mongoid_auto_increment' do
       expect(collection.find(:seq_name => 'Record').first).not_to eq nil
     end
   end
+
+  describe 'auto-increment with scope' do
+    context 'when scope is a relation' do
+      before do
+        @recipe1 = Recipe.create
+        @recipe2 = Recipe.create
+      end
+
+      it 'should have multiple with the same value' do
+        expect(@recipe1.ingredients.create.order).to eq 1
+        expect(@recipe2.ingredients.create.order).to eq 1
+      end
+
+      it 'should increment each scope separately' do
+        3.times.each{ |n| @recipe1.ingredients.create(name: n + 1) }
+        9.times.each{ |n| @recipe2.ingredients.create(name: n + 1) }
+        expect(Ingredient.find_by(recipe: @recipe2, name: 3).order).to eq 3
+        expect(Ingredient.find_by(recipe: @recipe2, name: 9).order).to eq 9
+      end
+    end
+
+    context 'when scope is a field' do
+      it 'should have multiple with the same value' do
+        expect(Recipe.create(chef: 'Jack').rank).to eq 1
+        expect(Recipe.create(chef: 'Jill').rank).to eq 1
+      end
+
+      it 'should increment each scope separately' do
+        3.times.each{ |n| Recipe.create(chef: 'Jack', name: n + 1) }
+        9.times.each{ |n| Recipe.create(chef: 'Jill', name: n + 1) }
+        expect(Recipe.find_by(chef: 'Jack', name: 3).rank).to eq 3
+        expect(Recipe.find_by(chef: 'Jill', name: 9).rank).to eq 9
+      end
+    end
+
+    context 'when scope is an array' do
+      before do
+        @recipe1 = Recipe.create
+        @recipe2 = Recipe.create
+      end
+
+      it 'should have multiple with the same value' do
+        expect(Ingredient.create(recipe: @recipe1, type: 'greens').cost).to eq 1
+        expect(Ingredient.create(recipe: @recipe1, type: 'meats').cost).to eq 1
+        expect(Ingredient.create(recipe: @recipe2, type: 'greens').cost).to eq 1
+      end
+
+      it 'should increment each scope separately' do
+        2.times.each{ |n| Ingredient.create(recipe: @recipe1, type: 'greens', name: n + 1) }
+        3.times.each{ |n| Ingredient.create(recipe: @recipe1, type: 'meats', name: n + 1) }
+        5.times.each{ |n| Ingredient.create(recipe: @recipe2, type: 'greens', name: n + 1) }
+        expect(Ingredient.find_by(recipe: @recipe1, type: 'greens', name: 2).cost).to eq 2
+        expect(Ingredient.find_by(recipe: @recipe1, type: 'meats', name: 3).cost).to eq 3
+        expect(Ingredient.find_by(recipe: @recipe2, type: 'greens', name: 5).cost).to eq 5
+      end
+    end
+  end
 end
