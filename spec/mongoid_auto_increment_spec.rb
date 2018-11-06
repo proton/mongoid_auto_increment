@@ -1,25 +1,24 @@
 require 'spec_helper'
 
 describe 'mongoid_auto_increment' do
-
   before(:each) do
-    @book1 = Book.create :name => 'The Rails Way'
-    @book2 = Book.create :name => 'The Ruby Programming Language '
-    @book3 = Book.create :name => 'Metaprogramming Ruby'
-    @order1 = Order.create :name => 'First Order'
-    @order2 = Order.create :name => 'Second Order'
-    @order3 = Order.create :name => 'Last Order'
-    @post1 = Post.create :name => 'First Post'
-    @post2 = Post.create :name => 'Second Post'
-    @post3 = Post.create :name => 'Last Post'
-    @comment1 = @post1.comments.create :name => 'First Comment'
-    @comment2 = @post1.comments.create :name => 'Second Comment'
-    @invoice1 = Invoice.create :name => 'First invoice'
-    @invoice2 = Invoice.create :name => 'Second invoice'
-    @invoice3 = Invoice.create :name => 'Third invoice'
-    @record1 = Record.create :name => 'First record'
-    @record2 = Record.create :name => 'Second record'
-    @record3 = Record.create :name => 'Third record'
+    @book1 = Book.create name: 'The Rails Way'
+    @book2 = Book.create name: 'The Ruby Programming Language '
+    @book3 = Book.create name: 'Metaprogramming Ruby'
+    @order1 = Order.create name: 'First Order'
+    @order2 = Order.create name: 'Second Order'
+    @order3 = Order.create name: 'Last Order'
+    @post1 = Post.create name: 'First Post'
+    @post2 = Post.create name: 'Second Post'
+    @post3 = Post.create name: 'Last Post'
+    @comment1 = @post1.comments.create name: 'First Comment'
+    @comment2 = @post1.comments.create name: 'Second Comment'
+    @invoice1 = Invoice.create name: 'First invoice'
+    @invoice2 = Invoice.create name: 'Second invoice'
+    @invoice3 = Invoice.create name: 'Third invoice'
+    @record1 = Record.create name: 'First record'
+    @record2 = Record.create name: 'Second record'
+    @record3 = Record.create name: 'Third record'
   end
 
   describe 'single auto-increment field' do
@@ -120,7 +119,7 @@ describe 'mongoid_auto_increment' do
     end
 
     it 'should have a sequence name of "Record"' do
-      expect(collection.find(:seq_name => 'Record').first).not_to eq nil
+      expect(collection.find(seq_name: 'Record').first).not_to eq nil
     end
   end
 
@@ -137,8 +136,8 @@ describe 'mongoid_auto_increment' do
       end
 
       it 'should increment each scope separately' do
-        3.times.each{ |n| @recipe1.ingredients.create(name: n + 1) }
-        9.times.each{ |n| @recipe2.ingredients.create(name: n + 1) }
+        3.times.each { |n| @recipe1.ingredients.create(name: n + 1) }
+        9.times.each { |n| @recipe2.ingredients.create(name: n + 1) }
         expect(Ingredient.find_by(recipe: @recipe2, name: 3).order).to eq 3
         expect(Ingredient.find_by(recipe: @recipe2, name: 9).order).to eq 9
       end
@@ -151,8 +150,8 @@ describe 'mongoid_auto_increment' do
       end
 
       it 'should increment each scope separately' do
-        3.times.each{ |n| Recipe.create(chef: 'Jack', name: n + 1) }
-        9.times.each{ |n| Recipe.create(chef: 'Jill', name: n + 1) }
+        3.times.each { |n| Recipe.create(chef: 'Jack', name: n + 1) }
+        9.times.each { |n| Recipe.create(chef: 'Jill', name: n + 1) }
         expect(Recipe.find_by(chef: 'Jack', name: 3).rank).to eq 3
         expect(Recipe.find_by(chef: 'Jill', name: 9).rank).to eq 9
       end
@@ -171,9 +170,9 @@ describe 'mongoid_auto_increment' do
       end
 
       it 'should increment each scope separately' do
-        2.times.each{ |n| Ingredient.create(recipe: @recipe1, type: 'greens', name: n + 1) }
-        3.times.each{ |n| Ingredient.create(recipe: @recipe1, type: 'meats', name: n + 1) }
-        5.times.each{ |n| Ingredient.create(recipe: @recipe2, type: 'greens', name: n + 1) }
+        2.times.each { |n| Ingredient.create(recipe: @recipe1, type: 'greens', name: n + 1) }
+        3.times.each { |n| Ingredient.create(recipe: @recipe1, type: 'meats', name: n + 1) }
+        5.times.each { |n| Ingredient.create(recipe: @recipe2, type: 'greens', name: n + 1) }
         expect(Ingredient.find_by(recipe: @recipe1, type: 'greens', name: 2).cost).to eq 2
         expect(Ingredient.find_by(recipe: @recipe1, type: 'meats', name: 3).cost).to eq 3
         expect(Ingredient.find_by(recipe: @recipe2, type: 'greens', name: 5).cost).to eq 5

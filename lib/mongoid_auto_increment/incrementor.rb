@@ -1,5 +1,5 @@
 # This is a modified version of the code found on this blog post:
-#   http://ihswebdesign.com/blog/autoincrement-in-mongodb-with-ruby/
+# http://ihswebdesign.com/blog/autoincrement-in-mongodb-with-ruby/
 module MongoidAutoIncrement
   class Incrementor
     class Sequence
@@ -11,26 +11,26 @@ module MongoidAutoIncrement
         @step = step.to_i
       end
 
-       def inc
+      def inc
         if defined?(::Mongoid::VERSION) && ::Mongoid::VERSION >= '5'
           collection.find(query).find_one_and_update({ '$inc' => { number: @step } }, new: true, upsert: true, return_document: :after)['number']
         elsif defined?(::Mongoid::VERSION) && ::Mongoid::VERSION >= '3'
           collection.find(query).modify({ '$inc' => { number: @step } }, new: true, upsert: true)['number']
         else
           opts = {
-            "query"  => query,
-            "update" => {"$inc" => { "number" => @step }},
-            "new"    => true # return the modified document
+            'query'  => query,
+            'update' => { '$inc' => { 'number' => @step } },
+            'new'    => true # return the modified document
           }
-          collection.find_and_modify(opts)["number"]
+          collection.find_and_modify(opts)['number']
         end
-       end
+      end
 
       def current
         if defined?(::Mongoid::VERSION) && ::Mongoid::VERSION >= '3'
-          collection.find(query).one["number"]
+          collection.find(query).one['number']
         else
-          collection.find_one(query)["number"]
+          collection.find_one(query)['number']
         end
       end
 
@@ -42,9 +42,9 @@ module MongoidAutoIncrement
 
       def create(number)
         if ::Mongoid::VERSION >= '5'
-          collection.insert_one(query.merge({ "number" => number }))
+          collection.insert_one(query.merge('number' => number))
         else
-          collection.insert(query.merge({ "number" => number }))
+          collection.insert(query.merge('number' => number))
         end
       end
 
@@ -59,15 +59,14 @@ module MongoidAutoIncrement
       end
 
       def query
-        @scope.merge("seq_name" => @sequence)
+        @scope.merge('seq_name' => @sequence)
       end
     end
 
-    def initialize(options=nil)
-    end
+    def initialize(options = nil); end
 
     def inc(sequence, options, record)
-      collection = options[:collection] || "sequences"
+      collection = options[:collection] || 'sequences'
       seed = options[:seed].to_i
       step = options[:step] || 1
       scope = resolve_scope(record, options[:scope])

@@ -4,8 +4,8 @@ module MongoidAutoIncrement
   extend ActiveSupport::Concern
 
   module ClassMethods
-    def auto_increment(name, options={})
-      field name, :type => Integer
+    def auto_increment(name, options = {})
+      field name, type: Integer
 
       unless defined? @@incrementor
         @@incrementor = MongoidAutoIncrement::Incrementor.new

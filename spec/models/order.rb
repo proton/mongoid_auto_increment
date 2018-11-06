@@ -4,5 +4,5 @@ class Order
 
   field :title
 
-  auto_increment :num, :seed => 1000
+  auto_increment :num, seed: 1000
 end
