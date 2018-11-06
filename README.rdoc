@@ -32,20 +32,20 @@ You can add more than one auto-incremented field per model.
 
 === Options
 
-    auto_increment :sequence, :collection => :some_collection
+    auto_increment :sequence, collection: :some_collection
 
 <tt>mongoid_auto_inc</tt> keeps track of the current number in the sequence by creating a separate document mongoDB to query and update.  By default <tt>auto_increment</tt> will save this document to a mongoDB collection called <tt>sequences</tt>.  If you wish to save to a different collection use the <tt>:collection</tt> option to specify its name.
 
-    auto_increment :sequence, :step => 5
+    auto_increment :sequence, step: 5
 
 If desired, you can override the <tt>:step</tt>, or increment amount (default is 1).
 
-    auto_increment :sequence, :seed => 3333
+    auto_increment :sequence, seed: 3333
 
-Use the <tt>:seed</tt> option to set the initial value of the auto-incremented field.  The first number assigned from the sequence will be the next number after the seed value (including the step - so for <tt>:seed => 1000, :step => 5</tt>, first value will be 1005).
+Use the <tt>:seed</tt> option to set the initial value of the auto-incremented field.  The first number assigned from the sequence will be the next number after the seed value (including the step - so for <tt>seed: 1000, step: 5</tt>, first value will be 1005).
 
-    auto_increment :sequence, :scope => :some_field_or_relation
-    auto_increment :sequence, :scope => [ :some_field_or_relation, :another_field_or_relation ]
+    auto_increment :sequence, scope: :some_field_or_relation
+    auto_increment :sequence, scope: [ :some_field_or_relation, :another_field_or_relation ]
 
 Use the <tt>:scope</tt> option to scope an auto-incremented field to a query.  Similar to Mongoid, the scope may contain one or many fields or relations.  Each unique scope will result in it's own stream of incremented values.
 
@@ -67,7 +67,7 @@ Use the <tt>:scope</tt> option to scope an auto-incremented field to a query.  S
 
 == Copyright
 
-(c) 2011 Peter Savichev (proton)
+(c) 2011-2018 Peter Savichev (proton)
 (c) 2010-2011 Jeff Smith
 
 See LICENSE.txt for further details.
