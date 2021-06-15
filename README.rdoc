@@ -64,6 +64,9 @@ Use the <tt>:scope</tt> option to scope an auto-incremented field to a query.  S
 
 {<img src="http://api.flattr.com/button/flattr-badge-large.png" />}[https://flattr.com/submit/auto?user_id=proton&url=https://github.com/proton/mongoid_auto_increment/&title=MongoidAutoIncrement&language=&tags=github&category=software]
 
+or
+
+https://www.patreon.com/_proton
 
 == Copyright
 
